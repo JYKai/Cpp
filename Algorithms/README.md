@@ -10,3 +10,6 @@
 | X    | 4    | Silver 1     | [구간 합 구하기 2](https://www.acmicpc.net/problem/11660) |
 | X    | 5    | Gold 3     | [나머지 합 구하기](https://www.acmicpc.net/problem/10986) |
 | X    | 6    | Silver 5     | [수들의 합 5](https://www.acmicpc.net/problem/2018) |
+| X    | 7    | Silver 4     | [주몽](https://www.acmicpc.net/problem/1940) |
+| X    | 8    | Gold 4     | [좋다](https://www.acmicpc.net/problem/1245) |
+| X    | 9    | Silver 5     | [DNA 비밀번호](https://www.acmicpc.net/problem/12891) |
