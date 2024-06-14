@@ -414,3 +414,6 @@ int SimpleFunc(void)
     ::val += 7;     // 전역변수 val의 값 7 증가
 }
 ```
+
+</br>
+
