@@ -417,3 +417,346 @@ int SimpleFunc(void)
 
 </br>
 
+## 새로운 자료형 bool
+
+### '참'을 의미하는 true와 '거짓'을 의미하는 false
+C++에서는 참과 거짓의 표현을 위한 키워드 true와 false를 정의하고 있기 때문에, 굳이 매크로 상수를 이용해서 참과 거짓을 표현할 필요가 없다.
+```c++
+#include <iostream>
+using namespace std;
+
+int main(void)
+{
+    int num = 10;
+    int i = 0;
+
+    cout << "true = " << true << endl;
+    cout << "false = " << false << endl;
+
+    while (true)
+    {
+        cout << i++ << " ";
+        if (i > num) { break; }
+        cout << endl;
+    }
+
+    cout << "sizeof 1: " << sizeof(1) << endl;
+    cout << "sizeof 0: " << sizeof(0) << endl;
+    cout << "sizeof true: " << sizeof(true) << endl;
+    cout << "sizeof false: " << sizeof(false) << endl;
+
+    return 0;
+}
+```
+- true는 1이 아니며, false 역시 0이 아니다. 이 둘은 '참'과 '거짓'을 표현하기 위한 1바이트 크기의 데이터일 뿐이다.
+- true와 false를 굳이 숫자에 연결시켜서 이해하지 말자.
+
+### 자료형 bool
+```c++
+#include <iostream>
+using namespace std;
+
+bool IsPositive(int num)
+{
+    if (num < 0) { return false; }
+    else { return true; }
+}
+
+int main(void)
+{
+    bool isPos;
+    int num;
+    cout << "Input number: "; cin >> num;
+
+    isPos = IsPositive(num);
+    if (isPos) { cout << "Positive number." << endl; }
+    else {cout << "Negative number." << endl; }
+
+    return 0;
+}
+```
+- true와 false를 가리켜 bool 데이터라 하며, 기본자료형의 하나 이기 때문에 bool형 변수를 선언하는 것이 가능하다.
+
+</br>
+
+## 참조자(Reference)
+
+### 참조자의 이해
+& 연산자는 변수의 주소 값을 반환하는 연산자이지만, 새로 선언되는 변수의 이름 앞에 사용하면 참조자의 선언을 뜻하게 된다.
+- ``` int &num2 = num1; ```
+- 참조자는 자신이 참조하는 변수를 대신할 수 있는 또 하나의 이름이다.
+```c++
+#include <iostream>
+using namespace std;
+
+int main(void)
+{
+    int num1 = 1020;
+    int &num2 = num1;
+
+    num2 = 3048;
+
+    cout << "VAL: " << num1 << endl;        // VAL: 3048
+    cout << "REF: " << num2 << endl;        // REF: 3048
+
+    cout << "VAL: " << &num1 << endl;       // VAL: 0x16ef6b0f8
+    cout << "REF: " << &num2 << endl;       // REF: 0x16ef6b0f8
+
+    return 0;
+}
+```
+- num2는 num1과 동일한 메모리 공간을 참조하게 된다. 따라서, 값의 변화가 같이 이루어지며 결과적으로 주소 또한 같음을 확인할 수 있다.
+- 참조자 수에는 제한이 없으며, 참조자를 대상으로도 참조자를 선언할 수 있다.
+
+
+### 참조자의 선언 가능 범위
+참조자는 변수에 대해서만 선언이 가능하고, 선언됨과 동시에 누군가를 참조해야한다.
+- 상수를 대상으로 참조자를 선언할 수는 없다.
+- 미리 참조자를 선언했다가, 후에 누군가를 참조하는 것을 불가능하다.
+```c++
+#include <iostream>
+using namespace std;
+
+int main(void)
+{
+    int arr[3] = {1, 3, 5};
+    int &ref1 = arr[0];
+    int &ref2 = arr[1];
+    int &ref3 = arr[2];
+
+    cout << ref1 << endl;   // 1
+    cout << ref2 << endl;   // 3
+    cout << ref3 << endl;   // 5
+
+    return 0;
+}
+```
+- 배열요소는(배열이 아닌, 배열요소) 변수로 간주되어 참조자의 선언이 가능하다.
+- 포인터 변수도 변수이기 때문에 참조자의 선언이 가능하다.
+```c++
+#include <iostream>
+using namespace std;
+
+int main(void)
+{
+    int num = 12;
+    int *ptr = &num;
+    int **dptr = &ptr;
+
+    int &ref = num;
+    int *(&pref) = ptr;
+    int **(&dpref) = dptr;
+
+    cout << ref << endl;        // 12
+    cout << *pref << endl;      // 12
+    cout << **dpref << endl;    // 12
+
+    return 0;
+}
+```
+- 포인터 변수의 참조자 선언도 & 연산자를 하나 더 추가하는 형태로 진행된다.
+
+</br>
+
+## 참조자(Reference)와 함수
+함수에 사용되는 매개변수에 참조자를 사용할 수 있다.
+- 매개변수는 함수가 호출되어야 초기화가 진행되는 변수들이기 때문에 매개변수 선언은 초기화가 이뤄지지 않은 것이 아니라, 함수호출 시 전달되는 인자로 초기화를 하겠다는 의미의 선언일 뿐이다.
+```c++
+#include <iostream>
+using namespace std;
+
+void SwapByRef2(int &ref1, int &ref2);
+
+int main(void)
+{
+    int val1 = 10;
+    int val2 = 20;
+
+    SwapByRef2(val1, val2);
+    
+    cout << "val1 = " << val1 << endl;  // val1 = 20
+    cout << "val2 = " << val2 << endl;  // val2 = 10
+
+    return 0;
+}
+
+void SwapByRef2(int &ref1, int &ref2)
+{
+    int temp = ref1;
+    ref1 = ref2;
+    ref2 = temp;
+}
+```
+- 위와 같이 C++에서는 Call-by-reference의 구현 방법에 참조자를 이용하는 방법과 주소 값을 이용하는 방법, 이렇게 두 가지가 존재한다.
+
+
+### 참조자를 이용한 Call-by-reference의 황당함과 const 참조자
+참조자를 사용하는 경우, 함수의 원형을 확인해야 하고, 확인결과 참조자가 매개변수의 선언에 와있다면, 함수의 몸체까지 문장 단위로 확인을 해서 참조자를 통한 값의 변경이 일어나는지를 확인해야 한다.
+- C언어에서는 함수의 호출문장만 보고도 값이 변경되지 않음을 알 수 있지만, C++에서는 불가능하다.
+- const 키워드를 이용하면 위의 단점을 어느 정도 보완할 수 있다.
+    - ```void HappyFunc(const int &ref) { ... }```
+        - 함수 HappyFunc 내에서 참조라 ref를 이용한 값의 변경은 하지 않겠다!
+    - 함수 내에서, 참조자를 통한 값의 변경을 진행하지 않을 경우, 참조자를 const로 선언해서, 함수의 원형만 봐도 값의 변경이 이뤄지지 않음을 알 수 있게 한다. => 중요한 원칙과 습관
+
+
+### 반환형이 참조형인 경우
+```c++
+#include <iostream>
+using namespace std;
+
+int& RefRetFuncOne(int &ref);
+
+int main(void)
+{
+    int num1 = 1;
+    int &num2 = RefRetFuncOne(num1);
+
+    num1++;
+    num2++;
+
+    cout << "num1: " << num1 << endl;   // num1: 4
+    cout << "num2: " << num2 << endl;   // num2: 4
+
+    return 0;
+}
+
+int& RefRetFuncOne(int &ref)
+{
+    ref++;
+    return ref;
+}
+```
+- 과정
+    - ```int num1 = 1 -> int &ref = num1 -> int &num2 = ref```
+- 매개변수로 선언된 참조자 ref는 지역변수와 동일한 성격을 갖으므로, 함수가 반환이 되면 참조자 ref는 소멸이 된다.
+- ```int &num2 = RefRetFuncOne(num1);``` 에서 ```int num2 = ... ``` 형식으로 바뀌게 되면?
+    ```c++
+    #include <iostream>
+    using namespace std;
+
+    int& RefRetFuncTwo(int &ref);
+
+    int main(void)
+    {
+        int num1 = 1;
+        int num2 = RefRetFuncTwo(num1);
+
+        num1++;
+        num2 += 100;
+
+        cout << "num1: " << num1 << endl;   // num1: 3
+        cout << "num2: " << num2 << endl;   // num2: 102
+
+        return 0;
+    }
+
+    int& RefRetFuncTwo(int &ref)
+    {
+        ref++;
+        return ref;
+    }
+    ```
+    - 참조형으로 반환이 되지만, 참조자가 아닌 일반변수를 선언해서 반환 값을 저장했기 때문에 num1과 num2는 완전히 별개의 변수가 된다.
+- 참조자를 반환하되, 반환형은 기본자료형인 경우 참조자가 참조하는 변수의 값이 반환된다.
+- 지역변수를 참조형으로 반환하게 되면 함수가 종료될 때 이미 지역변수는 사라지기 때문에 지역변수를 참조형으로 반환하는 일은 없어야한다.
+
+
+### const 참조자의 또 다른 특징 
+```c++
+const int num = 20;
+const int &ref = num;
+```
+- 상수화된 변수 num과 같이 참조자 선언 또한 const를 붙여준다.
+
+### 참조자가 상수를 참조한다..?
+```c++
+const int &ref = 50;
+```
+- const 참조자를 이용해서 상수를 참조할 때 '임시변수'라는 것을 만들어, 상수를 저장하고 참조자가 이를 참조하게끔 한다.
+
+**왜 굳이..?**  
+```c++
+int Adder(const int &num1, const int &num2)
+{
+    return num1 + num2;
+}
+```
+- 위와 같이 정의된 함수에 인자 전달을 목적으로 변수를 선언한다는 것은 매우 번거로운 일이 아닐 수 없다.
+    - 임시변수의 생성을 통한 const 참조자의 상수참조를 허용함으로써, 위의 함수는 간단히 호출할 수 있게 된다.
+
+</br>
+
+
+## malloc & free를 대신하는 new & delete
+
+### new & delete
+```c++
+#include <iostream>
+#include <string.h>
+#include <stdlib.h>
+using namespace std;
+
+char *MakeStrAdr(int len);
+
+int main(void)
+{
+    char *str = MakeStrAdr(20);
+    strcpy(str, "I am so happy~");
+    
+    cout << str << endl;    // I am so happy~
+    free(str);
+    return 0;
+}
+
+char *MakeStrAdr(int len)
+{
+    char *str = (char *)malloc(sizeof(char) * len);
+    return str;
+}
+```
+- ```char *str = (char *)malloc(sizeof(char) * len);```
+    - 할당된 대상의 정보를 무조건 바이트 크기단위로 전달해야 한다.
+    - 반환형이 void형 포인터이기 때문에 적절한 형 변환을 거쳐야 한다.
+
+```c++
+#include <iostream>
+#include <string.h>
+using namespace std;
+
+char *MakeStrAdr(int len);
+
+int main(void)
+{
+    char *str = MakeStrAdr(20);
+    strcpy(str, "I am so happy~");
+
+    cout << str << endl;
+    delete []str;
+    return 0;
+}
+
+char *MakeStrAdr(int len)
+{
+    char *str = new char[len];
+    return str;
+}
+```
+
+
+### 힙에 할당된 변수? 이제 포인터를 사용하지 않아도 접근할 수 있다.
+new 연산자를 이용해서 할당된 메모리 공간에도 참조자의 선언이 가능할까?
+- 변수의 자격을 갖추기 위해서는 메모리 공간이 할당되고, 그 공간을 의미하는 이름이 존재해야 하지만, C++에서는 new 연산자를 이용해서 할당된 메모리 공간도 변수로 간주한다. 따라서, 참조자로 선언할 수 있다.
+```c++
+int *ptr = new int;
+int &ref = *ptr;    // 힙 영역에 할당된 변수에 대한 참조자 선언
+ref = 20;
+cout << *ptr << endl;   // 출력결과는 20!
+```
+
+</br>
+
+## C++에서 C언어의 표준함수 호출하기
+
+### c를 더하고 .h를 빼라.
+- ```#include <stdio.h> -> #include <cstdio>```
+- ```#include <string.h> -> #include <cstring>```
