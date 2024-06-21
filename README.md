@@ -7,9 +7,11 @@
 ### Progress
 | No | Name |
 | :--- | ---- | 
-| 1    | [C언어 기반의 C++](https://github.com/JYKai/Cpp/tree/main/Theory/1_about_c%2B%2B) |
-| 2    | [클래스](https://github.com/JYKai/Cpp/tree/main/Theory/2_class) |
-| 3    | [복사 생성자](https://github.com/JYKai/Cpp/tree/main/Theory/3_copy_constructor) |
-| 4    | [friend와 static 그리고 const](https://github.com/JYKai/Cpp/tree/main/Theory/4_friend_static_const) |
+| 1    | [C언어 기반의 C++](https://github.com/JYKai/Cpp/tree/main/Theory/01_about_c%2B%2B) |
+| 2    | [클래스](https://github.com/JYKai/Cpp/tree/main/Theory/02_class) |
+| 3    | [복사 생성자](https://github.com/JYKai/Cpp/tree/main/Theory/03_copy_constructor) |
+| 4    | [friend와 static 그리고 const](https://github.com/JYKai/Cpp/tree/main/Theory/04_friend_static_const) |
+| 5    | [상속](https://github.com/JYKai/Cpp/tree/main/Theory/05_inheritance) |
+| 6    | [연산자 오버로딩](https://github.com/JYKai/Cpp/tree/main/Theory/05_inheritance) |
 
 ## Algorithm Learning
