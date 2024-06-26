@@ -1,6 +1,7 @@
 # Language C++
 
 ## Theroy Learning
+
 ### Materials
 - 도서 : 열혈 C++ 프로그래밍
 
@@ -16,3 +17,9 @@
 | 7    | [String 클래스 디자인](https://github.com/JYKai/Cpp/tree/main/Theory/07_design_string) |
 
 ## Algorithm Learning
+
+## Deep Learning
+
+### Materials
+
+### Progress
