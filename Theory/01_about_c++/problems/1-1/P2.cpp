@@ -1,18 +1,19 @@
 #include <iostream>
-using namespace std;
+#include <cstring>
 
-int main(void)
+int main()
 {
-    char name[20];
-    char number[20];
+    std::string name;
+    std::string number;
 
-    cout << "이름을 입력하세요: ";
-    cin >> name;
-    cout << "전화번호를 입력하세요: ";
-    cin >> number;
+    std::cout << "이름을 입력하세요: ";
+    std::getline(std::cin, name);
 
-    cout << "이름은 " << name << "입니다." << endl;
-    cout << "전화번호는 " << number << "입니다." << endl;
+    std::cout << "전화번호를 입력하세요: ";
+    std::getline(std::cin, number);
+
+    std::cout << "이름: " << name << std::endl;
+    std::cout << "전화번호: " << number << std::endl;
 
     return 0;
 }
