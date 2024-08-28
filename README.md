@@ -1,6 +1,6 @@
 # Language C++
 
-## Theroy Learning
+## Theroy01 Learning
 
 ### Materials
 - 도서 : 열혈 C++ 프로그래밍
@@ -15,6 +15,19 @@
 | 5    | [상속](https://github.com/JYKai/Cpp/tree/main/Theory/05_inheritance) |
 | 6    | [연산자 오버로딩](https://github.com/JYKai/Cpp/tree/main/Theory/06_operator_overloading |
 | 7    | [String 클래스 디자인](https://github.com/JYKai/Cpp/tree/main/Theory/07_design_string) |
+
+
+## Theroy01 Learning
+
+### Materials
+- 도서 : Do it! C++
+
+### Progress
+| No | Name |
+| :--- | ---- | 
+| 1    | [C++ 시작]() |
+| 2    | [변수와 연산자]() |
+
 
 ## Algorithm Learning
 
