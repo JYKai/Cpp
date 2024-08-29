@@ -27,6 +27,7 @@
 | :--- | ---- | 
 | 1    | [C++ 시작](https://github.com/JYKai/Cpp/tree/main/Theory02/001_start) |
 | 2    | [변수와 연산자](https://github.com/JYKai/Cpp/tree/main/Theory02/002_variables_operators) |
+| 3    | [포인터와 메모리](https://github.com/JYKai/Cpp/tree/main/Theory02/003_pointer_memory) |
 
 
 ## Algorithm Learning
