@@ -1,14 +1,15 @@
 #include <iostream>
+using namespace std;
 
 int main()
 {
     bool value;
 
     value = true;
-    std::cout << value << std::endl;
+    cout << value << endl;
 
     value = false;
-    std::cout << value << std::endl;
+    cout << value << endl;
 
     return 0;
 }
