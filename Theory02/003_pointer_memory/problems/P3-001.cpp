@@ -1,20 +1,21 @@
 #include <iostream>
+using namespace std;
 
 int main()
 {
-    int *arr = new int[5];
+    int *array = new int[5];
 
     for (int i = 0; i < 5; i++)
     {
-        arr[i] = i;
+        *(array + i) = i + 1;
     }
 
     for (int i = 0; i < 5; i++)
     {
-        std::cout << arr[i] << std::endl;
+        cout << *(array + i) << endl;
     }
 
-    delete []arr;
+    delete []array;
 
     return 0;
 }
