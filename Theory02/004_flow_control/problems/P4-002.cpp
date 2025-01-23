@@ -2,10 +2,11 @@
 
 int main()
 {
-    int number;
-    std::cout << "1 ~ 7 사이의 수를 입력하세요: "; std::cin >> number;
+    int num;
+    std::cout << "수를 입력하세요: ";
+    std::cin >> num;
 
-    switch (number)
+    switch (num)
     {
     case 1:
         std::cout << "월요일" << std::endl;
@@ -29,7 +30,7 @@ int main()
         std::cout << "일요일" << std::endl;
         break;
     default:
-        std::cout << "1 ~ 7 사이의 정수를 입력하세요." << std::endl;
+        std::cout << "1 ~ 7 사이의 수를 입력하세요." << std::endl;
         break;
     }
 
